@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/paid_clients"
+        android:orderInCategory="100"
+        android:title="@string/paid_clients"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/outstanding_clients"
+        android:orderInCategory="100"
+        android:title="@string/outstanding_clients"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/all_clients"
+        android:orderInCategory="100"
+        android:title="@string/all_clients"
+        app:showAsAction="never" />
+</menu>

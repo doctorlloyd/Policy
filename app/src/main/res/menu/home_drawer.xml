@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_register"
+            android:icon="@android:drawable/ic_menu_save"
+            android:title="Register" />
+        <item
+            android:id="@+id/nav_list_clients"
+            android:icon="@android:drawable/ic_menu_info_details"
+            android:title="list clients" />
+        <item
+            android:id="@+id/nav_location"
+            android:icon="@android:drawable/ic_menu_mylocation"
+            android:title="Location" />
+        <item
+            android:id="@+id/nav_setting"
+            android:icon="@android:drawable/ic_menu_set_as"
+            android:title="App setting" />
+    </group>
+
+    <item android:title="Communicate With Clients">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@android:drawable/ic_menu_share"
+                android:title="Share" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@android:drawable/ic_menu_send"
+                android:title="Send sms" />
+            <item
+                android:id="@+id/nav_about_us"
+                android:icon="@android:drawable/ic_menu_info_details"
+                android:title="About Us" />
+        </menu>
+    </item>
+</menu>
