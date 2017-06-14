@@ -3,13 +3,16 @@ package com.policy.ngobeni.policyapp;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 
 public class Register extends AppCompatActivity implements View.OnClickListener{
     private Button btnSignIn,btnCancel,btnRegister;
     private LinearLayout loginLayout, registerLayout;
+    private EditText etRegName,etRegSurname,etRegIDNumber,etRegAddress1,etRegAddress2,etRegAddress3,etRegCode,etRegContact;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +35,9 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
         btnSignIn.setOnClickListener(this);
         registerLayout = (LinearLayout) findViewById(R.id.register_layout);
         loginLayout = (LinearLayout) findViewById(R.id.login_layout);
+
+        //EDIT TEXT TO BE INITIALIZED
+
     }
 
     @Override
@@ -54,5 +60,24 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
             default:
                 break;
         }
+    }
+    boolean validateInputsRegistration()
+    {
+        String email = etRegName.getText().toString();
+        if (TextUtils.isEmpty(email)) {
+            etRegName.setError("Required.");
+            return false;
+        } else {
+            etRegName.setError(null);
+        }
+
+        String password = etRegSurname.getText().toString();
+        if (TextUtils.isEmpty(password)) {
+            etRegSurname.setError("Required.");
+            return false;
+        } else {
+            etRegSurname.setError(null);
+        }
+        return false;
     }
 }
