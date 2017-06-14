@@ -27,17 +27,27 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
     }
     void initialise()
     {
+        //INITIALIZING BUTTONS
         btnCancel = (Button) findViewById(R.id.btnCancel);
         btnCancel.setOnClickListener(this);
         btnRegister = (Button) findViewById(R.id.btnRegister);
         btnRegister.setOnClickListener(this);
         btnSignIn = (Button) findViewById(R.id.btnSignIn);
         btnSignIn.setOnClickListener(this);
+
+        //INITIALIZING LAYOUTS
         registerLayout = (LinearLayout) findViewById(R.id.register_layout);
         loginLayout = (LinearLayout) findViewById(R.id.login_layout);
 
         //EDIT TEXT TO BE INITIALIZED
-
+        etRegName = (EditText) findViewById(R.id.etReg_name);
+        etRegSurname = (EditText) findViewById(R.id.etReg_surname);
+        etRegIDNumber = (EditText) findViewById(R.id.etReg_id_number);
+        etRegAddress1 = (EditText) findViewById(R.id.etReg_address1);
+        etRegAddress2 = (EditText) findViewById(R.id.etReg_address2);
+        etRegAddress3 = (EditText) findViewById(R.id.etReg_address3);
+        etRegCode = (EditText) findViewById(R.id.etReg_address_code);
+        etRegContact = (EditText) findViewById(R.id.etReg_client_contact);
     }
 
     @Override
@@ -50,7 +60,10 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
                 setTitle("Admin Login");
                 break;
             case R.id.btnRegister:
+                if(validateInputsRegistration())
+                {
 
+                }
                 break;
             case R.id.btnSignIn:
                 registerLayout.setVisibility(View.VISIBLE);
@@ -63,20 +76,52 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
     }
     boolean validateInputsRegistration()
     {
-        String email = etRegName.getText().toString();
-        if (TextUtils.isEmpty(email)) {
+        String _name = etRegName.getText().toString();
+        if (TextUtils.isEmpty(_name)) {
             etRegName.setError("Required.");
             return false;
         } else {
             etRegName.setError(null);
         }
 
-        String password = etRegSurname.getText().toString();
-        if (TextUtils.isEmpty(password)) {
+        String _surname = etRegSurname.getText().toString();
+        if (TextUtils.isEmpty(_surname)) {
             etRegSurname.setError("Required.");
             return false;
         } else {
             etRegSurname.setError(null);
+        }
+
+        String _IDNumber = etRegIDNumber.getText().toString();
+        if (TextUtils.isEmpty(_IDNumber)) {
+            etRegIDNumber.setError("Required.");
+            return false;
+        } else {
+            etRegIDNumber.setError(null);
+        }
+
+        String address1 = etRegAddress1.getText().toString();
+        if (TextUtils.isEmpty(address1)) {
+            etRegAddress1.setError("Required.");
+            return false;
+        } else {
+            etRegAddress1.setError(null);
+        }
+
+        String _code = etRegCode.getText().toString();
+        if (TextUtils.isEmpty(_code)) {
+            etRegCode.setError("Required.");
+            return false;
+        } else {
+            etRegCode.setError(null);
+        }
+
+        String _contact = etRegContact.getText().toString();
+        if (TextUtils.isEmpty(_contact)) {
+            etRegContact.setError("Required.");
+            return false;
+        } else {
+            etRegContact.setError(null);
         }
         return false;
     }
