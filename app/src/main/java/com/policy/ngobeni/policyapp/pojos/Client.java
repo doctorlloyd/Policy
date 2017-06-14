@@ -3,18 +3,20 @@ package com.policy.ngobeni.policyapp.pojos;
 import java.io.Serializable;
 
 public class Client implements Serializable{
-    String firstName;
-    String lastName;
-    Long idNumber;
-    String address;
-    String cellNumber;
+    private String firstName;
+    private String lastName;
+    private Long idNumber;
+    private String address;
+    private String cellNumber;
+    private String gender;
 
-    public Client(String firstName, String lastName, Long idNumber, String address, String cellNumber) {
+    public Client(String firstName, String lastName, Long idNumber, String address, String cellNumber,String gender) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.idNumber = idNumber;
         this.address = address;
         this.cellNumber = cellNumber;
+        this.gender = gender;
     }
 
     public Client() {
@@ -23,6 +25,14 @@ public class Client implements Serializable{
     public String getFirstName() {
 
         return firstName;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public void setFirstName(String firstName) {
