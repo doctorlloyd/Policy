@@ -26,8 +26,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Register"
-            android:label="Admin Login"/>
+        <activity
+            android:name=".Register"
+            android:label="Admin Login" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -46,8 +47,16 @@
         <activity
             android:name=".Settings"
             android:label="@string/title_activity_settings" />
-        <activity android:name=".ListClients"
-            android:label="Clients"/>
+        <activity
+            android:name=".ListClients"
+            android:label="Clients" />
+        <activity android:name="com.policy.ngobeni.policyapp.AboutUs"
+            android:theme="@android:style/Theme.Dialog">
+            <intent-filter>
+                <action android:name="android.intent.action.ABOUT_US" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

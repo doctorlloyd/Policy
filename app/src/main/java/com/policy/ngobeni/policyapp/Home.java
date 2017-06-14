@@ -102,7 +102,8 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         } else if(id==R.id.nav_about_us)
         {
             //TODO a TextView to display information about the company
-
+            Intent intent = new Intent("android.intent.action.ABOUT_US");
+            startActivity(intent);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "281429192793",
+    "firebase_url": "https://ngobeni-policy.firebaseio.com",
+    "project_id": "ngobeni-policy",
+    "storage_bucket": "ngobeni-policy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:281429192793:android:dfc632d40f7b1ead",
+        "android_client_info": {
+          "package_name": "com.policy.ngobeni.policyapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "281429192793-t61ch0236iot4hvmd3davs1v9vee7oqr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.policy.ngobeni.policyapp",
+            "certificate_hash": "13f8b72abd5472dc606752fd4d054818d92e7a97"
+          }
+        },
+        {
+          "client_id": "281429192793-puuh9f200ujiq5gn2fipadn8moo2kc3v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAv209ywl1eOntH9CHpUBoKYgSm7V7ylKc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "281429192793-puuh9f200ujiq5gn2fipadn8moo2kc3v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
