@@ -1,7 +1,6 @@
 package com.policy.ngobeni.policyapp;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -9,30 +8,31 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-
+import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.policy.ngobeni.policyapp.pojos.Client;
 
 public class Register extends AppCompatActivity implements View.OnClickListener{
-    private Button btnSignIn,btnCancel,btnRegister;
     private LinearLayout loginLayout, registerLayout;
     private EditText etRegName,etRegSurname,etRegIDNumber,etRegAddress1,etRegAddress2,etRegAddress3,etRegCode,etRegContact;
-    private FirebaseAuth user;
-    private FirebaseUser fbuser;
-    private DatabaseReference databaseReference;
-    private Uri imageUri;
-    private StorageReference mStorageReference;
+    private FirebaseUser _fbuser;
+    private DatabaseReference _databaseReference;
+    private StorageReference _storageReference;
 
+    //TODO create a view for gender where i will get the value to populate the _gender variable
+    private String _name, _surname,_IDNumber,_contact,_code,_address1;
     // [START declare_auth_listener]
-    private FirebaseAuth.AuthStateListener mAuthListener;
+    private FirebaseAuth.AuthStateListener _authListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
         initialise();
-
     }
     @Override
     public void onBackPressed() {
@@ -42,11 +42,11 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
     void initialise()
     {
         //INITIALIZING BUTTONS
-        btnCancel = (Button) findViewById(R.id.btnCancel);
+        Button btnCancel = (Button) findViewById(R.id.btnCancel);
         btnCancel.setOnClickListener(this);
-        btnRegister = (Button) findViewById(R.id.btnRegister);
+        Button btnRegister = (Button) findViewById(R.id.btnRegister);
         btnRegister.setOnClickListener(this);
-        btnSignIn = (Button) findViewById(R.id.btnSignIn);
+        Button btnSignIn = (Button) findViewById(R.id.btnSignIn);
         btnSignIn.setOnClickListener(this);
 
         //INITIALIZING LAYOUTS
@@ -62,6 +62,12 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
         etRegAddress3 = (EditText) findViewById(R.id.etReg_address3);
         etRegCode = (EditText) findViewById(R.id.etReg_address_code);
         etRegContact = (EditText) findViewById(R.id.etReg_client_contact);
+
+        //INITIALIZING FIREBASE CONTENT
+        _storageReference = FirebaseStorage.getInstance().getReference();
+        _databaseReference = FirebaseDatabase.getInstance().getReference().child("Clients");
+        FirebaseAuth _user = FirebaseAuth.getInstance();
+        _fbuser = _user.getCurrentUser();
     }
 
     @Override
@@ -76,7 +82,20 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
             case R.id.btnRegister:
                 if(validateInputsRegistration())
                 {
-
+                    //String firstName, String lastName, Long idNumber, String address, String cellNumber,String gender)
+                    Client _client;
+                    String _address2 = etRegAddress2.getText().toString();
+                    String _address3 = etRegAddress3.getText().toString();
+                    String _gender = "";
+                    if(!_address2.isEmpty() && !_address3.isEmpty())
+                    {
+                        _client = new Client(_name,_surname,Long.parseLong(_IDNumber),_address1+"/n"
+                                +_address2+"/n"+_address3+"/n"+_code,_contact,_gender);
+                    }else {
+                        _client = new Client(_name,_surname,Long.parseLong(_IDNumber),_address1+"/n"+_code,_contact,_gender);
+                    }
+                    _databaseReference.push().setValue(_client);
+                    Toast.makeText(getBaseContext(),"Client successfully registered!..",Toast.LENGTH_LONG).show();
                 }
                 break;
             case R.id.btnSignIn:
@@ -90,7 +109,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
     }
     boolean validateInputsRegistration()
     {
-        String _name = etRegName.getText().toString();
+        _name = etRegName.getText().toString();
         if (TextUtils.isEmpty(_name)) {
             etRegName.setError("Required.");
             return false;
@@ -98,7 +117,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
             etRegName.setError(null);
         }
 
-        String _surname = etRegSurname.getText().toString();
+        _surname = etRegSurname.getText().toString();
         if (TextUtils.isEmpty(_surname)) {
             etRegSurname.setError("Required.");
             return false;
@@ -106,7 +125,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
             etRegSurname.setError(null);
         }
 
-        String _IDNumber = etRegIDNumber.getText().toString();
+        _IDNumber = etRegIDNumber.getText().toString();
         if (TextUtils.isEmpty(_IDNumber)) {
             etRegIDNumber.setError("Required.");
             return false;
@@ -114,15 +133,15 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
             etRegIDNumber.setError(null);
         }
 
-        String address1 = etRegAddress1.getText().toString();
-        if (TextUtils.isEmpty(address1)) {
+        _address1 = etRegAddress1.getText().toString();
+        if (TextUtils.isEmpty(_address1)) {
             etRegAddress1.setError("Required.");
             return false;
         } else {
             etRegAddress1.setError(null);
         }
 
-        String _code = etRegCode.getText().toString();
+        _code = etRegCode.getText().toString();
         if (TextUtils.isEmpty(_code)) {
             etRegCode.setError("Required.");
             return false;
@@ -130,7 +149,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
             etRegCode.setError(null);
         }
 
-        String _contact = etRegContact.getText().toString();
+        _contact = etRegContact.getText().toString();
         if (TextUtils.isEmpty(_contact)) {
             etRegContact.setError("Required.");
             return false;
