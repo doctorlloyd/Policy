@@ -20,12 +20,12 @@ import com.policy.ngobeni.policyapp.pojos.Client;
 public class Register extends AppCompatActivity implements View.OnClickListener{
     private LinearLayout loginLayout, registerLayout;
     private EditText etRegName,etRegSurname,etRegIDNumber,etRegAddress1,etRegAddress2,etRegAddress3,etRegCode,etRegContact;
+    //TODO create a view for gender where i will get the value to populate the _gender variable
+    private String _name, _surname,_IDNumber,_contact,_code,_address1;
+
     private FirebaseUser _fbuser;
     private DatabaseReference _databaseReference;
     private StorageReference _storageReference;
-
-    //TODO create a view for gender where i will get the value to populate the _gender variable
-    private String _name, _surname,_IDNumber,_contact,_code,_address1;
     // [START declare_auth_listener]
     private FirebaseAuth.AuthStateListener _authListener;
     @Override
@@ -89,13 +89,18 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
                     String _gender = "";
                     if(!_address2.isEmpty() && !_address3.isEmpty())
                     {
-                        _client = new Client(_name,_surname,Long.parseLong(_IDNumber),_address1+"/n"
-                                +_address2+"/n"+_address3+"/n"+_code,_contact,_gender);
+                        _client = new Client(_name,_surname,Long.parseLong(_IDNumber),_address1+", "
+                                +_address2+", "+_address3+", "+_code,_contact,_gender);
                     }else {
-                        _client = new Client(_name,_surname,Long.parseLong(_IDNumber),_address1+"/n"+_code,_contact,_gender);
+                        _client = new Client(_name,_surname,Long.parseLong(_IDNumber),_address1+", "+_code,_contact,_gender);
                     }
-                    _databaseReference.push().setValue(_client);
+                    String _key = _databaseReference.push().getKey();
+                    _databaseReference.child(_key).setValue(_client);
                     Toast.makeText(getBaseContext(),"Client successfully registered!..",Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(getBaseContext(),UpdateClient.class);
+                    intent.putExtra("key",_key);
+                    startActivity(intent);
+                    finish();
                 }
                 break;
             case R.id.btnSignIn:
@@ -156,6 +161,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
         } else {
             etRegContact.setError(null);
         }
-        return false;
+        return true;
     }
 }
