@@ -1,6 +1,7 @@
 package com.policy.ngobeni.policyapp;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -9,10 +10,23 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.storage.StorageReference;
+
 public class Register extends AppCompatActivity implements View.OnClickListener{
     private Button btnSignIn,btnCancel,btnRegister;
     private LinearLayout loginLayout, registerLayout;
     private EditText etRegName,etRegSurname,etRegIDNumber,etRegAddress1,etRegAddress2,etRegAddress3,etRegCode,etRegContact;
+    private FirebaseAuth user;
+    private FirebaseUser fbuser;
+    private DatabaseReference databaseReference;
+    private Uri imageUri;
+    private StorageReference mStorageReference;
+
+    // [START declare_auth_listener]
+    private FirebaseAuth.AuthStateListener mAuthListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
