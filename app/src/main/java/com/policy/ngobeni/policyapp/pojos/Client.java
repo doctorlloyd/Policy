@@ -3,6 +3,7 @@ package com.policy.ngobeni.policyapp.pojos;
 import java.io.Serializable;
 
 public class Client implements Serializable{
+
     private String firstName;
     private String lastName;
     private Long idNumber;

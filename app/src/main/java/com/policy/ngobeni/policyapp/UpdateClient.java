@@ -52,7 +52,7 @@ public class UpdateClient extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                client = (Client) dataSnapshot.getValue();
+                client = dataSnapshot.getValue(Client.class);
 
                 //TODO extracting the object
                 _name = client.getFirstName();
@@ -108,7 +108,7 @@ public class UpdateClient extends AppCompatActivity implements View.OnClickListe
         {
             case R.id.btnUpdate:
                 /*
-                **
+                **********************************
                  */
                 _name = etEditName.getText().toString();
                 _surname = etEditSurname.getText().toString();
@@ -117,12 +117,21 @@ public class UpdateClient extends AppCompatActivity implements View.OnClickListe
                 _contact = etEditContact.getText().toString();
                 _gender = etEditGender.getText().toString();
                 /*
-                **
+                *****************************
                  */
                 client = new Client(_name,_surname,Long.parseLong(_IDNumber),_address,_contact,_gender);
                 _databaseReference.child("Clients").child(_key).setValue(client);
                 /*
-                **
+                *********************************
+                 */
+                etEditName.setActivated(false);
+                etEditSurname.setActivated(false);
+                etEditIDNumber.setActivated(false);
+                etEditAddress.setActivated(false);
+                etEditContact.setActivated(false);
+                etEditGender.setActivated(false);
+                /*
+                ******************************************
                  */
                 btnUpdade.setVisibility(View.GONE);
                 btnAddDependent.setVisibility(View.VISIBLE);
