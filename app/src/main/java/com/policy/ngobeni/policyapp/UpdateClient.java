@@ -120,16 +120,16 @@ public class UpdateClient extends AppCompatActivity implements View.OnClickListe
                 *****************************
                  */
                 client = new Client(_name,_surname,Long.parseLong(_IDNumber),_address,_contact,_gender);
-                _databaseReference.child("Clients").child(_key).setValue(client);
+                _databaseReference.setValue(client);
                 /*
                 *********************************
                  */
-                etEditName.setActivated(false);
-                etEditSurname.setActivated(false);
-                etEditIDNumber.setActivated(false);
-                etEditAddress.setActivated(false);
-                etEditContact.setActivated(false);
-                etEditGender.setActivated(false);
+                etEditName.setFocusable(false);
+                etEditSurname.setFocusable(false);
+                etEditIDNumber.setFocusable(false);
+                etEditAddress.setFocusable(false);
+                etEditContact.setFocusable(false);
+                etEditGender.setFocusable(false);
                 /*
                 ******************************************
                  */

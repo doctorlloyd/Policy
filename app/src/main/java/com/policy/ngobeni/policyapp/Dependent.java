@@ -45,7 +45,7 @@ public class Dependent extends AppCompatActivity implements View.OnClickListener
 //                Member member = new Member();
                 break;
             case R.id.btnDoneDependent:
-
+                onBackPressed();
                 break;
             default:
                 break;
