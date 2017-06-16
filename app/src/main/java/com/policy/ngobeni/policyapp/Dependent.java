@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.policy.ngobeni.policyapp.pojos.Member;
+
 import static com.policy.ngobeni.policyapp.R.id.btnAddDependent;
 import static com.policy.ngobeni.policyapp.R.id.btnUpdate;
 
@@ -40,7 +42,7 @@ public class Dependent extends AppCompatActivity implements View.OnClickListener
         int id = view.getId();
         switch (id){
             case R.id.btnRegisterDependent:
-
+//                Member member = new Member();
                 break;
             case R.id.btnDoneDependent:
 
