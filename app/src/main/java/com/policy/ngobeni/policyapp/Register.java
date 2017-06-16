@@ -82,7 +82,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
             case R.id.btnRegister:
                 if(validateInputsRegistration())
                 {
-                    //String firstName, String lastName, Long idNumber, String address, String cellNumber,String gender)
                     Client _client;
                     String _address2 = etRegAddress2.getText().toString();
                     String _address3 = etRegAddress3.getText().toString();

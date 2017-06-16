@@ -84,4 +84,11 @@
     <string name="paid_clients">Paid Clients</string>
     <string name="all_clients">All Clients</string>
     <string name="about_us">About Us</string>
+    <string name="add_dependent">Add dependent</string>
+    <string name="done">Done</string>
+    <string name="update">Update</string>
+    <string name="dependent_first_name">Dependent First Name:</string>
+    <string name="dependent_id_number">Dependent ID Number:</string>
+    <string name="dependent_last_name">Dependent Last Name:</string>
+    <string name="relationship">Relationship:</string>
 </resources>

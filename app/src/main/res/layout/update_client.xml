@@ -1,97 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView android:layout_height="match_parent"
-    android:layout_width="match_parent"
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/register_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:orientation="vertical"
-        tools:context="com.policy.ngobeni.policyapp.UpdateClient">
-        <SearchView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:queryHint="Enter Client ID Number"
-            android:visibility="gone"
-            android:inputType="number"
-            android:id="@+id/search_client_searchView"/>
-        <EditText
-            android:id="@+id/editText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:enabled="false"
-            android:inputType="textPersonName"
-            android:text="Name" />
+        android:padding="24dp">
 
         <EditText
-            android:id="@+id/editText7"
+            android:id="@+id/etEdit_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:enabled="false"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            android:inputType="textPersonName" />
 
         <EditText
-            android:id="@+id/editText8"
+            android:id="@+id/etEdit_surname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:enabled="false"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            android:inputType="textPersonName" />
+
 
         <EditText
-            android:id="@+id/editText9"
+            android:id="@+id/etEdit_id_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:enabled="false"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            android:inputType="number" />
 
         <EditText
-            android:id="@+id/editText11"
+            android:id="@+id/etEdit_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:enabled="false"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            android:inputType="textAutoComplete"/>
 
         <EditText
-            android:id="@+id/editText12"
+            android:id="@+id/etEdit_gender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:enabled="false"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            android:inputType="textAutoComplete" />
 
         <EditText
-            android:id="@+id/editText6"
+            android:id="@+id/etEdit_client_contact"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:enabled="false"
-            android:inputType="textPersonName"
-            android:text="Name" />
-
-        <EditText
-            android:id="@+id/editText10"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:enabled="false"
-            android:inputType="textPersonName"
-            android:text="Name" />
-
-        <Button
-            android:id="@+id/edit_profile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:enabled="false"
-            android:text="Edit Profile" />
+            android:inputType="phone" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="16dp">
 
+            <Button
+                android:id="@+id/btnUpdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/update" />
+
+            <Button
+                android:id="@+id/btnAddDependent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:visibility="gone"
+                android:text="@string/add_dependent" />
+
+            <Button
+                android:id="@+id/btnDone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:visibility="gone"
+                android:text="@string/done" />
         </LinearLayout>
     </LinearLayout>
-
 </ScrollView>

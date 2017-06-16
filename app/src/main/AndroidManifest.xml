@@ -59,7 +59,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".UpdateClient"></activity>
+        <activity android:name=".UpdateClient" />
+        <activity android:name=".Dependent"></activity>
     </application>
 
 </manifest>
