@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:enabled="false"
             android:inputType="textPersonName"
-            android:text="Name" />
+            android:text="@string/client_first_name" />
 
         <EditText
             android:id="@+id/editText7"
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:enabled="false"
             android:inputType="textPersonName"
-            android:text="Name" />
+            android:text="@string/client_last_name" />
 
         <EditText
             android:id="@+id/editText8"
@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:enabled="false"
             android:inputType="textPersonName"
-            android:text="Name" />
+            android:text="@string/client_id_number" />
 
         <EditText
             android:id="@+id/editText9"
@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:enabled="false"
             android:inputType="textPersonName"
-            android:text="Name" />
+            android:text="@string/client_physical_address" />
 
         <EditText
             android:id="@+id/editText11"
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:enabled="false"
             android:inputType="textPersonName"
-            android:text="Name" />
+            android:text="@string/client_gender" />
 
         <EditText
             android:id="@+id/editText12"
@@ -66,30 +66,25 @@
             android:layout_height="wrap_content"
             android:enabled="false"
             android:inputType="textPersonName"
-            android:text="Name" />
-
+            android:text="@string/cell_number" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/amount_payable" />
         <EditText
             android:id="@+id/editText6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:enabled="false"
             android:inputType="textPersonName"
-            android:text="Name" />
-
-        <EditText
-            android:id="@+id/editText10"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:enabled="false"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            android:hint="@string/min_200"/>
 
         <Button
             android:id="@+id/edit_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:enabled="false"
-            android:text="Edit Profile" />
+            android:text="@string/edit_profile" />
 
         <LinearLayout
             android:layout_width="match_parent"

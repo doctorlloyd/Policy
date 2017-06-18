@@ -106,6 +106,10 @@
     <string name="register">register</string>
     <string name="cancel">Cancel</string>
     <string name="client_gender">client gender:</string>
+    <string name="dependent_gender">Dependent gender:</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="amount_payable">Amount payable:</string>
+    <string name="min_200">Min: 200</string>
 
     <string-array name="gender_array">
         <item>Male</item>

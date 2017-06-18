@@ -12,15 +12,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.SearchView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, SearchView.OnQueryTextListener {
+public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
+        SearchView.OnQueryTextListener, View.OnClickListener {
 
     private SearchView searchAutoComplete;
     private FirebaseUser _fbuser;
@@ -135,5 +142,20 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     @Override
     public boolean onQueryTextChange(String s) {
         return false;
+    }
+    void initialize(){
+        Button btnDone = (Button) findViewById(R.id.btn);
+        btnDone.setOnClickListener(this);
+
+        //INITIALIZING FIREBASE CONTENT
+        _storageReference = FirebaseStorage.getInstance().getReference();
+        _databaseReference = FirebaseDatabase.getInstance().getReference().child("Clients");
+        FirebaseAuth _user = FirebaseAuth.getInstance();
+        _fbuser = _user.getCurrentUser();
+    }
+
+    @Override
+    public void onClick(View view) {
+
     }
 }

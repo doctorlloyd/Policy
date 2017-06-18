@@ -40,7 +40,12 @@ public class UpdateClient extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.update_client);
         initialise();
 
-        _key = getIntent().getStringExtra("key");
+        try{
+            _key = getIntent().getStringExtra("key");
+        }catch(Exception e)
+        {
+            System.out.print("=====================================================: "+_key);
+        }
 
         //INITIALIZING FIREBASE CONTENT
         _storageReference = FirebaseStorage.getInstance().getReference();
