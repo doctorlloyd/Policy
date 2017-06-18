@@ -75,7 +75,7 @@
             android:id="@+id/etHomeAmount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
+            android:inputType="numberDecimal"
             android:hint="@string/min_200"/>
 
         <Button
