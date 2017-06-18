@@ -15,9 +15,19 @@ import android.view.MenuItem;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.storage.StorageReference;
+
 public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, SearchView.OnQueryTextListener {
 
     private SearchView searchAutoComplete;
+    private FirebaseUser _fbuser;
+    private DatabaseReference _databaseReference;
+    private StorageReference _storageReference;
+    //[START declare_auth_listener]
+    private FirebaseAuth.AuthStateListener _authListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

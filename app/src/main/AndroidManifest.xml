@@ -28,7 +28,7 @@
         </activity>
         <activity
             android:name=".Register"
-            android:label="Admin Login" />
+            android:label="Client Registration" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -59,8 +59,10 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".UpdateClient" />
-        <activity android:name=".Dependent"></activity>
+        <activity android:name=".UpdateClient"
+            android:label="Confirm details"/>
+        <activity android:name=".Dependent"
+            android:label="Client dependent"/>
     </application>
 
 </manifest>
