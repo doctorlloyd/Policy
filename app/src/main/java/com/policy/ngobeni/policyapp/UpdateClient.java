@@ -41,7 +41,7 @@ public class UpdateClient extends AppCompatActivity implements View.OnClickListe
         initialise();
 
         try{
-            _key = getIntent().getStringExtra("key");
+            _key = getIntent().getStringExtra("_key");
         }catch(Exception e)
         {
             System.out.print("=====================================================: "+_key);

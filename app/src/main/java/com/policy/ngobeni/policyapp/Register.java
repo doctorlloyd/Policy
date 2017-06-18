@@ -106,7 +106,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                     _databaseReference.child(_key).setValue(_client);
                     Toast.makeText(getBaseContext(), "Client successfully registered!..", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(getBaseContext(), UpdateClient.class);
-                    intent.putExtra("key", _key);
+                    intent.putExtra("_key", _key);
                     startActivity(intent);
                     finish();
                 }

@@ -21,7 +21,7 @@
             android:inputType="number"
             android:id="@+id/search_client_searchView"/>
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/etHomeFirstname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:enabled="false"
@@ -29,7 +29,7 @@
             android:text="@string/client_first_name" />
 
         <EditText
-            android:id="@+id/editText7"
+            android:id="@+id/etHomeLastname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:enabled="false"
@@ -37,7 +37,7 @@
             android:text="@string/client_last_name" />
 
         <EditText
-            android:id="@+id/editText8"
+            android:id="@+id/etHomeIDnumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:enabled="false"
@@ -45,7 +45,7 @@
             android:text="@string/client_id_number" />
 
         <EditText
-            android:id="@+id/editText9"
+            android:id="@+id/etHomeAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:enabled="false"
@@ -53,7 +53,7 @@
             android:text="@string/client_physical_address" />
 
         <EditText
-            android:id="@+id/editText11"
+            android:id="@+id/etHomeGender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:enabled="false"
@@ -61,7 +61,7 @@
             android:text="@string/client_gender" />
 
         <EditText
-            android:id="@+id/editText12"
+            android:id="@+id/etHomeContact"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:enabled="false"
@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             android:text="@string/amount_payable" />
         <EditText
-            android:id="@+id/editText6"
+            android:id="@+id/etHomeAmount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:enabled="false"

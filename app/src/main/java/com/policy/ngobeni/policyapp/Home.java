@@ -2,6 +2,7 @@ package com.policy.ngobeni.policyapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -21,10 +22,14 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.policy.ngobeni.policyapp.pojos.Client;
 
 public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
         SearchView.OnQueryTextListener, View.OnClickListener {
@@ -33,14 +38,18 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     private FirebaseUser _fbuser;
     private DatabaseReference _databaseReference;
     private StorageReference _storageReference;
-    //[START declare_auth_listener]
     private FirebaseAuth.AuthStateListener _authListener;
+    private Client client = new Client();
+
+    private EditText etEditName,etEditSurname,etEditIDNumber,etEditAddress,etEditGender,etEditContact,etEditAmount;
+    private String _key = "_key";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        initialize();
 
         searchAutoComplete = (SearchView)findViewById(R.id.search_client_searchView);
         searchAutoComplete.setSubmitButtonEnabled(true);
@@ -94,7 +103,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
         if (id == R.id.nav_register) {
@@ -133,9 +142,33 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     }
 
     @Override
-    public boolean onQueryTextSubmit(String s) {
-        Toast.makeText(getBaseContext(),s,Toast.LENGTH_LONG).show();
+    public boolean onQueryTextSubmit(final String _id_number) {
+        Toast.makeText(getBaseContext(),_id_number,Toast.LENGTH_LONG).show();
         searchAutoComplete.setVisibility(View.GONE);
+        _databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot ds: dataSnapshot.getChildren())
+                {
+                    client = ds.getValue(Client.class);
+                    if(client.getIdNumber().equals(Long.parseLong(_id_number))){
+                        _key = ds.getKey();
+                        etEditName.setText(client.getFirstName());
+                        etEditSurname.setText(client.getLastName());
+                        etEditIDNumber.setText(String.valueOf(client.getIdNumber()));
+                        etEditAddress.setText(client.getAddress());
+                        etEditContact.setText(client.getCellNumber());
+                        etEditGender.setText(client.getGender());
+
+                        _databaseReference.removeEventListener(this);
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         return false;
     }
 
@@ -144,8 +177,17 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         return false;
     }
     void initialize(){
-        Button btnDone = (Button) findViewById(R.id.btn);
+        Button btnDone = (Button) findViewById(R.id.edit_profile);
         btnDone.setOnClickListener(this);
+
+        //EDIT TEXT TO BE INITIALIZED
+        etEditName = (EditText) findViewById(R.id.etHomeFirstname);
+        etEditSurname = (EditText) findViewById(R.id.etHomeLastname);
+        etEditIDNumber = (EditText) findViewById(R.id.etHomeIDnumber);
+        etEditAddress = (EditText) findViewById(R.id.etHomeAddress);
+        etEditGender = (EditText) findViewById(R.id.etHomeGender);
+        etEditContact = (EditText) findViewById(R.id.etHomeContact);
+        etEditAmount = (EditText) findViewById(R.id.etHomeAmount);
 
         //INITIALIZING FIREBASE CONTENT
         _storageReference = FirebaseStorage.getInstance().getReference();
@@ -156,6 +198,16 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
     @Override
     public void onClick(View view) {
-
+        int view_id = view.getId();
+        switch (view_id){
+            case R.id.edit_profile:
+                Intent intent = new Intent(getBaseContext(), UpdateClient.class);
+                intent.putExtra("_key", _key);
+                startActivity(intent);
+                finish();
+                break;
+            default:
+                break;
+        }
     }
 }
