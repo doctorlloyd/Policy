@@ -26,28 +26,17 @@ import static com.policy.ngobeni.policyapp.R.id.etRegDependent_relationship;
 public class Dependent extends AppCompatActivity implements View.OnClickListener{
     private String _key;
     private Spinner spinner;
-    private LinearLayout loginLayout, registerLayout;
     private EditText etRegName, etRegSurname, etRegIDNumber, etRegRelationship;
     //TODO create a view for gender where i will get the value to populate the _gender variable
-    private String _name, _surname, _IDNumber, _gender, _relationship;
+    private String _name, _surname, _IDNumber, _relationship;
 
-    private FirebaseUser _fbuser;
     private DatabaseReference _databaseReference;
-    private StorageReference _storageReference;
-    //[START declare_auth_listener]
-    private FirebaseAuth.AuthStateListener _authListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dependent_registration);
+        _key = getIntent().getStringExtra("_key");
         initialize();
-
-        try{
-            _key = getIntent().getStringExtra("_key");
-        }catch(Exception e)
-        {
-            System.out.print("=====================================================: "+_key);
-        }
     }
 
     void initialize(){
@@ -72,17 +61,12 @@ public class Dependent extends AppCompatActivity implements View.OnClickListener
         spinner.setAdapter(adapter);
 
         //INITIALIZING FIREBASE CONTENT
-        _storageReference = FirebaseStorage.getInstance().getReference();
         _databaseReference = FirebaseDatabase.getInstance().getReference().child("Clients").child(_key).child("Dependents");
-        FirebaseAuth _user = FirebaseAuth.getInstance();
-        _fbuser = _user.getCurrentUser();
 
     }
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(getBaseContext(),UpdateClient.class);
-        intent.putExtra("_key",_key);
-        startActivity(intent);
+        startActivity(new Intent(getBaseContext(), Register.class));
         finish();
     }
 
@@ -96,6 +80,12 @@ public class Dependent extends AppCompatActivity implements View.OnClickListener
                     //String firstName, String lastName, Long idNumber, String relationShip
                     Member member = new Member(_name,_surname,Long.parseLong(_IDNumber),_relationship,String.valueOf(spinner.getSelectedItem()));
                     _databaseReference.push().setValue(member);
+                    Toast.makeText(getBaseContext(),"Dependent added successfully",Toast.LENGTH_LONG).show();
+
+                    Intent intent = new Intent(getBaseContext(), Dependent.class);
+                    intent.putExtra("_key", _key);
+                    startActivity(intent);
+                    finish();
                 }else {
                     Toast.makeText(getBaseContext(),"Missing inputs...",Toast.LENGTH_LONG).show();
                 }

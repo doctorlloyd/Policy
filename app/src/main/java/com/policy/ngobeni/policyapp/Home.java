@@ -37,12 +37,15 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     private SearchView searchAutoComplete;
     private FirebaseUser _fbuser;
     private DatabaseReference _databaseReference;
+    private String _id;
+    private Button btnUpdateHome;
     private StorageReference _storageReference;
     private FirebaseAuth.AuthStateListener _authListener;
-    private Client client = new Client();
+    private Client client;
 
-    private EditText etEditName,etEditSurname,etEditIDNumber,etEditAddress,etEditGender,etEditContact,etEditAmount;
+    private EditText etEditName, etEditSurname, etEditIDNumber, etEditAddress, etEditGender, etEditContact, etEditAmount;
     private String _key = "_key";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +54,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         setSupportActionBar(toolbar);
         initialize();
 
-        searchAutoComplete = (SearchView)findViewById(R.id.search_client_searchView);
+        searchAutoComplete = (SearchView) findViewById(R.id.search_client_searchView);
         searchAutoComplete.setSubmitButtonEnabled(true);
         searchAutoComplete.setOnQueryTextListener(this);
 
@@ -95,7 +98,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
         if (id == R.id.lightTheme) {
             return true;
-        }else if(id == R.id.darkTheme) {
+        } else if (id == R.id.darkTheme) {
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -107,16 +110,16 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         int id = item.getItemId();
 
         if (id == R.id.nav_register) {
-            startActivity(new Intent(getBaseContext(),Register.class));
+            startActivity(new Intent(getBaseContext(), Register.class));
             finish();
         } else if (id == R.id.nav_list_clients) {
-            startActivity(new Intent(getBaseContext(),ListClients.class));
+            startActivity(new Intent(getBaseContext(), ListClients.class));
             finish();
         } else if (id == R.id.nav_location) {
-            startActivity(new Intent(getBaseContext(),Location.class));
+            startActivity(new Intent(getBaseContext(), Location.class));
             finish();
         } else if (id == R.id.nav_setting) {
-            startActivity(new Intent(getBaseContext(),Settings.class));
+            startActivity(new Intent(getBaseContext(), Settings.class));
             finish();
 
         } else if (id == R.id.nav_share) {
@@ -125,8 +128,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         } else if (id == R.id.nav_send) {
             //TODO an intent to trigger sms Api
 
-        } else if(id==R.id.nav_about_us)
-        {
+        } else if (id == R.id.nav_about_us) {
             //TODO a TextView to display information about the company
             Intent intent = new Intent("android.intent.action.ABOUT_US");
             startActivity(intent);
@@ -135,50 +137,53 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    public void createExitDialog()
-    {
+
+    public void createExitDialog() {
         //TODO a dialog box to exit the app
         super.onBackPressed();
     }
 
     @Override
-    public boolean onQueryTextSubmit(final String _id_number) {
-        Toast.makeText(getBaseContext(),_id_number,Toast.LENGTH_LONG).show();
+    public boolean onQueryTextSubmit(final String id_number) {
         searchAutoComplete.setVisibility(View.GONE);
-        _databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot ds: dataSnapshot.getChildren())
-                {
-                    client = ds.getValue(Client.class);
-                    if(client.getIdNumber().equals(Long.parseLong(_id_number))){
-                        _key = ds.getKey();
-                        etEditName.setText(client.getFirstName());
-                        etEditSurname.setText(client.getLastName());
-                        etEditIDNumber.setText(String.valueOf(client.getIdNumber()));
-                        etEditAddress.setText(client.getAddress());
-                        etEditContact.setText(client.getCellNumber());
-                        etEditGender.setText(client.getGender());
-
-                        _databaseReference.removeEventListener(this);
-                    }
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+        _id = id_number;
+        _databaseReference.addValueEventListener(evantListener);
         return false;
     }
+
+    ValueEventListener evantListener = new ValueEventListener() {
+        @Override
+        public void onDataChange(DataSnapshot dataSnapshot) {
+            for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                client = ds.getValue(Client.class);
+                //Todo
+                if (client.getIdNumber().equals(Long.parseLong(_id))) {
+                    etEditName.setText(client.getFirstName());
+                    etEditSurname.setText(client.getLastName());
+                    etEditIDNumber.setText(String.valueOf(client.getIdNumber()));
+                    etEditAddress.setText(client.getAddress());
+                    etEditContact.setText(client.getCellNumber());
+                    etEditGender.setText(client.getGender());
+                    _key = ds.getKey();
+                    _databaseReference.removeEventListener(this);
+                    btnUpdateHome.setEnabled(true);
+                }
+            }
+        }
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+
+        }
+    };
 
     @Override
     public boolean onQueryTextChange(String s) {
         return false;
     }
-    void initialize(){
-        Button btnDone = (Button) findViewById(R.id.edit_profile);
-        btnDone.setOnClickListener(this);
+
+    void initialize() {
+        btnUpdateHome = (Button) findViewById(R.id.edit_profile);
+        btnUpdateHome.setOnClickListener(this);
 
         //EDIT TEXT TO BE INITIALIZED
         etEditName = (EditText) findViewById(R.id.etHomeFirstname);
@@ -190,16 +195,13 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         etEditAmount = (EditText) findViewById(R.id.etHomeAmount);
 
         //INITIALIZING FIREBASE CONTENT
-        _storageReference = FirebaseStorage.getInstance().getReference();
         _databaseReference = FirebaseDatabase.getInstance().getReference().child("Clients");
-        FirebaseAuth _user = FirebaseAuth.getInstance();
-        _fbuser = _user.getCurrentUser();
     }
 
     @Override
     public void onClick(View view) {
         int view_id = view.getId();
-        switch (view_id){
+        switch (view_id) {
             case R.id.edit_profile:
                 Intent intent = new Intent(getBaseContext(), UpdateClient.class);
                 intent.putExtra("_key", _key);

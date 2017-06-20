@@ -86,9 +86,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnCancel:
-                registerLayout.setVisibility(View.GONE);
-                loginLayout.setVisibility(View.VISIBLE);
-                setTitle("Admin Login");
+                startActivity(new Intent(getBaseContext(),Home.class));
+                finish();
                 break;
             case R.id.btnRegister:
                 if (validateInputsRegistration()) {

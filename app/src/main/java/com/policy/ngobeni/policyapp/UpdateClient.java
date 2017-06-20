@@ -20,14 +20,13 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.policy.ngobeni.policyapp.pojos.Client;
 
-public class UpdateClient extends AppCompatActivity implements View.OnClickListener{
-    private String _key = "";
+public class UpdateClient extends AppCompatActivity implements View.OnClickListener {
     Client client = new Client();
+    private String _key;
+    private EditText etEditName, etEditSurname, etEditIDNumber, etEditAddress, etEditGender, etEditContact;
+    private String _name, _surname, _IDNumber, _contact, _address, _gender;
 
-    private EditText etEditName,etEditSurname,etEditIDNumber,etEditAddress,etEditGender,etEditContact;
-    private String _name, _surname,_IDNumber,_contact,_address,_gender;
-
-    private Button btnDone, btnUpdade,btnAddDependent;
+    private Button btnDone, btnUpdade, btnAddDependent;
 
     private FirebaseUser _fbuser;
     private DatabaseReference _databaseReference;
@@ -40,16 +39,13 @@ public class UpdateClient extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.update_client);
         initialise();
 
-        try{
-            _key = getIntent().getStringExtra("_key");
-        }catch(Exception e)
-        {
-            System.out.print("=====================================================: "+_key);
-        }
+
+        _key = getIntent().getStringExtra("_key");
 
         //INITIALIZING FIREBASE CONTENT
         _storageReference = FirebaseStorage.getInstance().getReference();
         _databaseReference = FirebaseDatabase.getInstance().getReference().child("Clients").child(_key);
+
         FirebaseAuth _user = FirebaseAuth.getInstance();
         _fbuser = _user.getCurrentUser();
 
@@ -82,13 +78,14 @@ public class UpdateClient extends AppCompatActivity implements View.OnClickListe
             }
         });
     }
+
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(getBaseContext(),Home.class));
+        startActivity(new Intent(getBaseContext(), Home.class));
         finish();
     }
-    void initialise()
-    {
+
+    void initialise() {
         //INITIALIZING BUTTONS
         btnUpdade = (Button) findViewById(R.id.btnUpdate);
         btnUpdade.setOnClickListener(this);
@@ -109,8 +106,7 @@ public class UpdateClient extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         int id = view.getId();
-        switch (id)
-        {
+        switch (id) {
             case R.id.btnUpdate:
                 /*
                 **********************************
@@ -124,34 +120,34 @@ public class UpdateClient extends AppCompatActivity implements View.OnClickListe
                 /*
                 *****************************
                  */
-                client = new Client(_name,_surname,Long.parseLong(_IDNumber),_address,_contact,_gender);
+                client = new Client(_name, _surname, Long.parseLong(_IDNumber), _address, _contact, _gender);
                 _databaseReference.setValue(client);
                 /*
                 *********************************
                  */
-                etEditName.setFocusable(false);
-                etEditSurname.setFocusable(false);
-                etEditIDNumber.setFocusable(false);
-                etEditAddress.setFocusable(false);
-                etEditContact.setFocusable(false);
-                etEditGender.setFocusable(false);
+                etEditName.setEnabled(false);
+                etEditSurname.setEnabled(false);
+                etEditIDNumber.setEnabled(false);
+                etEditAddress.setEnabled(false);
+                etEditContact.setEnabled(false);
+                etEditGender.setEnabled(false);
                 /*
                 ******************************************
                  */
                 btnUpdade.setVisibility(View.GONE);
                 btnAddDependent.setVisibility(View.VISIBLE);
                 btnDone.setVisibility(View.VISIBLE);
-                Toast.makeText(getBaseContext(),"Updated",Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), "Updated", Toast.LENGTH_LONG).show();
                 break;
             case R.id.btnAddDependent:
-                Intent intent = new Intent(getBaseContext(),Dependent.class);
-                intent.putExtra("_client",client);
-                intent.putExtra("_key",_key);
+                Intent intent = new Intent(getBaseContext(), Dependent.class);
+//                intent.putExtra("_client", client);
+                intent.putExtra("_key", _key);
                 startActivity(intent);
                 finish();
                 break;
             case R.id.btnDone:
-                startActivity(new Intent(getBaseContext(),Register.class));
+                startActivity(new Intent(getBaseContext(), Register.class));
                 finish();
                 break;
             default:
