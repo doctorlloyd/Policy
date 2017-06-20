@@ -13,13 +13,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SearchView;
-import android.widget.Spinner;
-import android.widget.Toast;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -27,7 +23,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.policy.ngobeni.policyapp.pojos.Client;
 
@@ -35,12 +30,9 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         SearchView.OnQueryTextListener, View.OnClickListener {
 
     private SearchView searchAutoComplete;
-    private FirebaseUser _fbuser;
     private DatabaseReference _databaseReference;
     private String _id;
     private Button btnUpdateHome;
-    private StorageReference _storageReference;
-    private FirebaseAuth.AuthStateListener _authListener;
     private Client client;
 
     private EditText etEditName, etEditSurname, etEditIDNumber, etEditAddress, etEditGender, etEditContact, etEditAmount;

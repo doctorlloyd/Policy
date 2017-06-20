@@ -8,20 +8,11 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.policy.ngobeni.policyapp.pojos.Member;
-
-import static com.policy.ngobeni.policyapp.R.id.btnAddDependent;
-import static com.policy.ngobeni.policyapp.R.id.btnUpdate;
-import static com.policy.ngobeni.policyapp.R.id.etRegDependent_relationship;
 
 public class Dependent extends AppCompatActivity implements View.OnClickListener{
     private String _key;
@@ -77,7 +68,6 @@ public class Dependent extends AppCompatActivity implements View.OnClickListener
             case R.id.btnRegisterDependent:
                 if(validateInputsRegistration())
                 {
-                    //String firstName, String lastName, Long idNumber, String relationShip
                     Member member = new Member(_name,_surname,Long.parseLong(_IDNumber),_relationship,String.valueOf(spinner.getSelectedItem()));
                     _databaseReference.push().setValue(member);
                     Toast.makeText(getBaseContext(),"Dependent added successfully",Toast.LENGTH_LONG).show();

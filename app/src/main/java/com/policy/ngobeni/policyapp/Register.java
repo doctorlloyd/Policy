@@ -11,12 +11,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.policy.ngobeni.policyapp.pojos.Client;
 
 public class Register extends AppCompatActivity implements View.OnClickListener {
@@ -26,11 +22,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     //TODO create a view for gender where i will get the value to populate the _gender variable
     private String _name, _surname, _IDNumber, _contact, _code, _address1;
 
-    private FirebaseUser _fbuser;
     private DatabaseReference _databaseReference;
-    private StorageReference _storageReference;
-    //[START declare_auth_listener]
-    private FirebaseAuth.AuthStateListener _authListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,10 +68,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         spinner.setAdapter(adapter);
 
         //INITIALIZING FIREBASE CONTENT
-        _storageReference = FirebaseStorage.getInstance().getReference();
         _databaseReference = FirebaseDatabase.getInstance().getReference().child("Clients");
-        FirebaseAuth _user = FirebaseAuth.getInstance();
-        _fbuser = _user.getCurrentUser();
     }
 
     @Override

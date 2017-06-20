@@ -28,10 +28,7 @@ public class UpdateClient extends AppCompatActivity implements View.OnClickListe
 
     private Button btnDone, btnUpdade, btnAddDependent;
 
-    private FirebaseUser _fbuser;
     private DatabaseReference _databaseReference;
-    private StorageReference _storageReference;
-    private FirebaseAuth.AuthStateListener _authListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +40,9 @@ public class UpdateClient extends AppCompatActivity implements View.OnClickListe
         _key = getIntent().getStringExtra("_key");
 
         //INITIALIZING FIREBASE CONTENT
-        _storageReference = FirebaseStorage.getInstance().getReference();
         _databaseReference = FirebaseDatabase.getInstance().getReference().child("Clients").child(_key);
 
         FirebaseAuth _user = FirebaseAuth.getInstance();
-        _fbuser = _user.getCurrentUser();
 
         _databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
