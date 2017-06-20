@@ -27,7 +27,6 @@ public class UpdateClient extends AppCompatActivity implements View.OnClickListe
     private String _name, _surname, _IDNumber, _contact, _address, _gender;
 
     private Button btnDone, btnUpdade, btnAddDependent;
-
     private DatabaseReference _databaseReference;
 
     @Override
